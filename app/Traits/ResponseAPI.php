@@ -16,7 +16,20 @@ trait ResponseAPI
      */
     protected function success($data, string $message = null, int $statusCode = 200, $isSuccess = true)
     {
-
+        if ($isSuccess) {
+            return response()->json([
+                'message' => $message,
+                'error' => false,
+                'code' => $statusCode,
+                'results' => $data
+            ], $statusCode);
+        } else {
+            return response()->json([
+                'message' => $message,
+                'error' => true,
+                'code' => $statusCode,
+            ], $statusCode);
+        }
 
     }
 
