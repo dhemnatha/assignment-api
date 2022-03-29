@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 Category::create([
-                    "category_id" => $data['0'],
+                    "id" => $data['0'],
                     "count" => $data['1'],
                     "parent_id" => $data['2'],
                     "name" => $data['3']

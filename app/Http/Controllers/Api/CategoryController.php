@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Traits\ResponseAPI;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Interfaces\CategoryInterface;
+use Illuminate\Http\Response;
 
 
 class CategoryController extends Controller
 {
     use ResponseAPI;
 
-    protected $categoryInteface;
+    protected $categoryInterface;
 
     public function __construct(CategoryInterface $categoryInterface)
     {
@@ -20,13 +21,11 @@ class CategoryController extends Controller
 
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
-        return $this->categoryInterface->getAllCategories();
+        return $this->categoryInterface->getCategoriesWithSubCategories();
     }
 
 }

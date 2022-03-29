@@ -12,6 +12,20 @@ class Category extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'category_id','count', 'parent_id', 'name'
+        'count',
+        'parent_id',
+        'name'
     ];
+    protected $hidden = ['created_at', 'updated_at'];
+
+    public function scopeParent($query)
+    {
+        $query->where('parent_id', 0);
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
 }

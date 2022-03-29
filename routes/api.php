@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\LoginController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,9 +15,12 @@ use App\Http\Controllers\Api\CategoryController;
 |
 */
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'doLogin']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/categories', [CategoryController::class, 'index']);
-    Route::post('/logout', [LoginController::class, 'logout']);
-});
+Route::group(
+    ['middleware' => ['auth:sanctum']],
+    function () {
+        Route::get('/categories', [CategoryController::class, 'index']);
+        Route::post('/logout', [LoginController::class, 'logout']);
+    }
+);

@@ -3,20 +3,20 @@
 namespace App\Repositories;
 
 use App\Interfaces\CategoryInterface;
-use App\Traits\ResponseAPI;
 use App\Models\Category;
+use App\Traits\ResponseAPI;
+use Exception;
 
 class CategoryRepository implements CategoryInterface
 {
-    // Use ResponseAPI Trait in this repository
     use ResponseAPI;
 
-    public function getAllCategories()
+    public function getCategoriesWithSubCategories()
     {
         try {
-            $categories = Category::all();
-            return $this->success($categories,"Categories");
-        } catch (\Exception $e) {
+            $categories = Category::with('subcategories.subcategories.subcategories')->parent()->get();
+            return $this->success($categories, "Categories");
+        } catch (Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
         }
     }
