@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +15,9 @@ use App\Http\Controllers\Api\CategoryController;
 |
 */
 
-Route::post('/auth/register', [AuthController::class, 'register']);
-
-Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [LoginController::class, 'logout']);
 });

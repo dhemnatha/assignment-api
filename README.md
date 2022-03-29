@@ -16,4 +16,4 @@ run `php artisan db:seed --class=CategorySeeder` this will seed the users table 
 run `php artisan server` to start local server
 
 ## login route
-http://127.0.0.1:8000/api/auth/login
+http://127.0.0.1:8000/api/login
