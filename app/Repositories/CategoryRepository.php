@@ -14,7 +14,7 @@ class CategoryRepository implements CategoryInterface
     public function getCategoriesWithSubCategories()
     {
         try {
-            $categories = Category::with('subcategories.subcategories.subcategories')->parent()->get();
+            $categories = Category::all();
             return $this->success($categories, "Categories");
         } catch (Exception $e) {
             return $this->error($e->getMessage(), $e->getCode());
